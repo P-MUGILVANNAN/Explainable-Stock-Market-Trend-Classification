@@ -1,0 +1,18 @@
+[
+  {
+    "symbol": "AAPL",
+    "model": "random_forest",
+    "horizon_days": 1,
+    "test_samples": 30,
+    "price_only_acc": 43.33,
+    "price_news_acc": 40.0,
+    "acc_delta": -3.33,
+    "price_only_f1": 29.61,
+    "price_news_f1": 24.26,
+    "f1_delta": -5.35,
+    "p_value": 0.952,
+    "ci_lower": -23.33,
+    "ci_upper": 23.33,
+    "significant": false
+  }
+]

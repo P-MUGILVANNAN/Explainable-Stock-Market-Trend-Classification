@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: stockxai-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: stock_trend_xai
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stockxai-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - DATABASE_NAME=stock_trend_xai
+      - JWT_SECRET=super-secret-stock-xai-key-change-in-production-123456
+      - MODEL_STORAGE_PATH=/app/saved_models
+      - ALLOWED_ORIGINS=["http://localhost:5173","http://localhost:3000","*"]
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend/saved_models:/app/saved_models
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stockxai-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+

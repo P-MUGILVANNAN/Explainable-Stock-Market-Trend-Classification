@@ -1,0 +1,2 @@
+symbol,model,horizon_days,test_samples,price_only_acc,price_news_acc,acc_delta,price_only_f1,price_news_f1,f1_delta,p_value,ci_lower,ci_upper,significant
+AAPL,random_forest,1,30,43.33,40.0,-3.33,29.61,24.26,-5.35,0.952,-23.33,23.33,False
